@@ -20,7 +20,9 @@ function ReadingListPage({ userID }) {
     };
 
     const getBookIds = async () => {
-      const response = await fetch(`${process.env.DB_URL}/user/reading_list/${userID}`);
+      const response = await fetch(
+        `https://readly-2ed12337352a.herokuapp.com/user/reading_list/${userID}`
+      );
       const resJson = await response.json();
       bookIds = resJson;
 

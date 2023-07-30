@@ -11,7 +11,7 @@ function Category() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.DB_URL}/catalog/${category}/books`)
+      .get(`https://readly-2ed12337352a.herokuapp.com/catalog/${category}/books`)
       .then((response) => {
         setBooks(response.data);
         setIsLoading(false);

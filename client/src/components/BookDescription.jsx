@@ -37,7 +37,7 @@ function BookDescription({ id }) {
   useEffect(() => {
     const getBooks = async () => {
       const result = await apiRequest(
-        `${process.env.DB_URL}/user/reading_list/${auth.user._id}`,
+        `https://readly-2ed12337352a.herokuapp.com/user/reading_list/${auth.user._id}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -58,7 +58,7 @@ function BookDescription({ id }) {
   const handleAddBookReadingList = async (e) => {
     e.preventDefault();
     const result = await apiRequest(
-      `${process.env.DB_URL}/user/reading_list/add`,
+      `https://readly-2ed12337352a.herokuapp.com/user/reading_list/add`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -77,7 +77,7 @@ function BookDescription({ id }) {
   const handleRemoveBookReadingList = async (e) => {
     e.preventDefault();
     const result = await apiRequest(
-      `${process.env.DB_URL}/user/reading_list/remove`,
+      `https://readly-2ed12337352a.herokuapp.com/user/reading_list/remove`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -98,7 +98,7 @@ function BookDescription({ id }) {
     console.log(`user: ${auth.user._id}`);
     console.log(`book: ${book._id}`);
     const result = await apiRequest(
-      `${process.env.DB_URL}/user/cart/add`,
+      `https://readly-2ed12337352a.herokuapp.com/user/cart/add`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
