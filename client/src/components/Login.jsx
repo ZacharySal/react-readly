@@ -80,9 +80,9 @@ function Login({ setIsRegister }) {
               onBlur={login_formik.handleBlur}
               placeholder="Password"
             />
-            <button className="button">login</button>
+            <button className="form-button">login</button>
             <p className="message">
-              <button className="button" onClick={() => setIsRegister(true)}>
+              <button className="form-button" onClick={() => setIsRegister(true)}>
                 Not registered? Create an account
               </button>
             </p>

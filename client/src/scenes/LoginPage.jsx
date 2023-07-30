@@ -9,6 +9,7 @@ function LoginPage() {
   return (
     <>
       <div
+        className="login-bg"
         style={{
           width: "100%",
           height: "100%",

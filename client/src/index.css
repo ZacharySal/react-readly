@@ -305,6 +305,12 @@ a:not([class]) {
   padding: 8% 0 0;
 }
 
+.login-bg {
+  background-image: url("../public/images/cool-background.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .form {
   position: relative;
   z-index: 1;
@@ -325,19 +331,6 @@ a:not([class]) {
   padding: 15px;
   box-sizing: border-box;
   font-size: 25px;
-}
-
-.form button {
-  outline: 0;
-  font-family: "Playfair Display", serif;
-  background: antiquewhite;
-  width: 100%;
-  border: 0;
-  margin: 0;
-  padding: 15px;
-  border-radius: 20px;
-  font-size: 20px;
-  cursor: pointer;
 }
 
 .form-error {
@@ -413,7 +406,7 @@ a:not([class]) {
   border-radius: 10px;
   font-size: 1rem;
   height: 4rem;
-  width: 15rem;
+  width: 20rem;
   margin: 1rem;
   background: antiquewhite;
   display: flex;
@@ -422,6 +415,35 @@ a:not([class]) {
   transition: transform 0.1s;
   text-transform: uppercase;
   user-select: none;
+}
+
+.form-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-size: 1rem;
+  height: 4rem;
+  width: 20rem;
+  margin: 1rem;
+  display: flex;
+  color: black;
+  cursor: pointer;
+  text-transform: uppercase;
+  user-select: none;
+  font-family: "Playfair Display", serif;
+  background: white;
+  width: 100%;
+  border: 1;
+  margin: 0;
+  padding: 15px;
+  border-radius: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.form button:hover {
+  color: lightcoral;
 }
 i {
   margin-right: 10px;
