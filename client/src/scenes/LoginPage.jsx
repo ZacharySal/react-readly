@@ -19,8 +19,8 @@ function LoginPage() {
         }}
       >
         <h1 style={{ fontSize: "3rem", fontFamily: "Playfair Display, serif" }}>
-          Welcome to <span style={{ color: "lightcoral" }}>Readly</span>! A place to view and
-          explore every book imaginable!
+          Welcome to <span style={{ color: "lightcoral" }}>Readly</span>, A place to view and
+          explore every book imaginable
         </h1>
         {isRegister && <Register setIsRegister={setIsRegister} />}
         {!isRegister && <Login setIsRegister={setIsRegister} />}
