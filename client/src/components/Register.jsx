@@ -17,7 +17,7 @@ function Register({ setIsRegister }) {
   let handleRegisterSubmit = async (e) => {
     e.preventDefault();
     const result = await apiRequest(
-      "https://readly-6c4c3a8d382b.herokuapp.com/auth/register",
+      `${process.env.DB_URL}/auth/register`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

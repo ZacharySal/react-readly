@@ -21,7 +21,7 @@ function CartItem({ bookId, bookIds, setBookIds }) {
   const handleRemoveItem = async (e) => {
     e.preventDefault();
     const result = await apiRequest(
-      "https://readly-6c4c3a8d382b.herokuapp.com/user/cart/remove",
+      `${process.env.DB_URL}/user/cart/remove`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

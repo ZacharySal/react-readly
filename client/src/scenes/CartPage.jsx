@@ -17,7 +17,7 @@ function CartPage({ userID }) {
   useEffect(() => {
     const makeRequest = async () => {
       const result = await apiRequest(
-        `https://readly-6c4c3a8d382b.herokuapp.com/user/cart/${userID}`,
+        `${process.env.DB_URL}/user/cart/${userID}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -36,7 +36,7 @@ function CartPage({ userID }) {
 
   const handleConfirmOrder = async () => {
     const result = await apiRequest(
-      "https://readly-6c4c3a8d382b.herokuapp.com/user/order_history/add",
+      `${process.env.DB_URL}/user/order_history/add`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -13,7 +13,7 @@ function OrderHistoryPage({ userID }) {
   useEffect(() => {
     const makeRequest = async () => {
       const result = await apiRequest(
-        `https://readly-6c4c3a8d382b.herokuapp.com/user/order_history/${userID}`,
+        `${process.env.DB_URL}/user/order_history/${userID}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -35,7 +35,7 @@ function OrderHistoryPage({ userID }) {
     e.preventDefault();
     console.log(order_id);
     const result = await apiRequest(
-      "https://readly-6c4c3a8d382b.herokuapp.com/user/order_history/remove",
+      `${process.env.DB_URL}/user/order_history/remove`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

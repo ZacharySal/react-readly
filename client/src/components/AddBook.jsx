@@ -10,7 +10,7 @@ function AddBook() {
   let handleSubmit = async (e) => {
     e.preventDefault();
     const result = await apiRequest(
-      "https://readly-6c4c3a8d382b.herokuapp.com/catalog/create/book",
+      `${process.env.DB_URL}/catalog/create/book`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
