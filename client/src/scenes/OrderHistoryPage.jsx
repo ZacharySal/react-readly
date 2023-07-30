@@ -51,32 +51,35 @@ function OrderHistoryPage({ userID }) {
     }
   };
 
-  if (!isLoading) {
-    return (
-      <>
-        {errMsg && <InfoMessage type="error" resetMsg={setErrorMsg} text={errMsg} />}
-        {infoMsg && <InfoMessage type="info" resetMsg={setInfoMsg} text={infoMsg} />}
-        <ContentLayout>
-          <div
-            style={{
-              width: "100%",
-              height: "80%",
-              display: "flex",
-              margin: "4rem auto 0rem auto",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              gap: "2rem",
-            }}
-          >
-            {orders.map((order) => (
-              <Order order={order} key={order._id} handleRemoveOrder={handleRemoveOrder} />
-            ))}
-          </div>
-        </ContentLayout>
-      </>
-    );
-  }
+  return (
+    <>
+      {!isLoading && (
+        <>
+          {errMsg && <InfoMessage type="error" resetMsg={setErrorMsg} text={errMsg} />}
+          {infoMsg && <InfoMessage type="info" resetMsg={setInfoMsg} text={infoMsg} />}
+          <ContentLayout>
+            <div
+              style={{
+                width: "100%",
+                height: "80%",
+                display: "flex",
+                margin: "4rem auto 0rem auto",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+                gap: "2rem",
+              }}
+            >
+              {orders.map((order) => (
+                <Order order={order} key={order._id} handleRemoveOrder={handleRemoveOrder} />
+              ))}
+            </div>
+          </ContentLayout>
+        </>
+      )}
+      {isLoading && <h1>Loading....</h1>}
+    </>
+  );
 }
 
 export default OrderHistoryPage;
