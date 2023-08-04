@@ -3,9 +3,11 @@ import useAuth from "../hooks/useAuth";
 
 function MenuBar() {
   let navigate = useNavigate();
-  const genres = ["Mystery", "Fantasy", "Love", "Childrens"];
+
+  const genres = ["Nonfiction", "Fiction", "True Crime", "Juvenile Fiction"];
   const authors = ["Stephen King", "George R. R. Martin", "James Patterson"];
-  const { setAuth } = useAuth();
+
+  const { auth, setAuth } = useAuth();
 
   function handleLogout() {
     setAuth("");
@@ -13,7 +15,7 @@ function MenuBar() {
   }
 
   return (
-    <div className="sidebar">
+    <div className="sidebar mobile-hidden">
       <div className="sidebar-header">Genres</div>
       {genres.map((genre) => {
         return (
@@ -39,19 +41,18 @@ function MenuBar() {
       <div className="sidebar-item" onClick={() => navigate("/reading_list")}>
         Reading List
       </div>
-      <div className="sidebar-item" onClick={handleLogout}>
-        Logout
-      </div>
+      {auth.user && (
+        <div className="sidebar-item" onClick={handleLogout}>
+          Logout
+        </div>
+      )}
+      {!auth.user && (
+        <div className="sidebar-item" onClick={() => navigate("/reading_list")}>
+          Login
+        </div>
+      )}
+
       <hr />
-      <div className="sidebar-header">System</div>
-      <div
-        onClick={() => {
-          navigate("/add_book");
-        }}
-        className="sidebar-item"
-      >
-        Add Book
-      </div>
     </div>
   );
 }

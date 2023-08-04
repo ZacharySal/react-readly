@@ -1,5 +1,4 @@
 import HomePage from "./scenes/HomePage";
-import AddBookPage from "./scenes/AddBookPage";
 import BookDetailPage from "./scenes/BookDetailPage";
 import CategoryPage from "./scenes/CategoryPage";
 import ReadingListPage from "./scenes/ReadingListPage";
@@ -30,14 +29,13 @@ function App() {
   if (!isLoading) {
     return (
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<Layout />}>
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/book_detail/:id" element={<BookDetailPage />} />
+          <Route path="/:type/:category" element={<CategoryPage />} />
           <Route element={<RequireAuth />}>
-            <Route path="/" element={<HomePage />} />
             <Route path="/cart" element={<CartPage userID={userID} />} />
-            <Route path="/book_detail/:id" element={<BookDetailPage />} />
-            <Route path="/:type/:category" element={<CategoryPage />} />
-            <Route path="/add_book" element={<AddBookPage />} />
             <Route path="/order_history" element={<OrderHistoryPage userID={userID} />} />
             <Route path="/reading_list" element={<ReadingListPage userID={userID} />} />
           </Route>

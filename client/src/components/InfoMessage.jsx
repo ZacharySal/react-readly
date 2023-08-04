@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 function InfoMessage({ text, resetMsg, type }) {
   const [showMsg, setShowMsg] = useState(true);
-  console.log(showMsg);
 
   useEffect(() => {
     setTimeout(function () {
@@ -15,10 +14,10 @@ function InfoMessage({ text, resetMsg, type }) {
     return (
       <div className="info-message-container">
         {type === "error" && (
-          <i style={{ color: "red", padding: "1rem" }} className="fa-regular fa-circle-xmark"></i>
+          <i style={{ color: "red" }} className="fa-regular fa-circle-xmark"></i>
         )}
         {type === "info" && (
-          <i style={{ color: "green", padding: "1rem" }} className="fa-regular fa-circle-check"></i>
+          <i style={{ color: "green" }} className="fa-regular fa-circle-check"></i>
         )}
         <p className="info-message-text">{text}</p>
       </div>

@@ -24,7 +24,7 @@ function Register({ setIsRegister }) {
         body: JSON.stringify({
           firstName: values.firstName,
           lastName: values.lastName,
-          email: values.email,
+          email: values.email.toLowerCase(),
           password: values.password,
         }),
       },
@@ -50,55 +50,51 @@ function Register({ setIsRegister }) {
     });
 
   return (
-    <div className="login-page">
-      <div className="form">
-        <form className="register-form" onSubmit={handleRegisterSubmit}>
-          {errors.firstName && touched.firstName && (
-            <p className="form-error">{errors.firstName}</p>
-          )}
-          <input
-            type="text"
-            id="firstName"
-            value={values.firstName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            placeholder="First Name"
-          />
-          {errors.lastName && touched.lastName && <p className="form-error">{errors.lastName}</p>}
-          <input
-            type="text"
-            id="lastName"
-            value={values.lastName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            placeholder="Last Name"
-          />
-          {errors.email && touched.email && <p className="form-error">{errors.email}</p>}
-          <input
-            type="text"
-            id="email"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            placeholder="Email Address"
-          />
-          {errors.password && touched.password && <p className="form-error">{errors.password}</p>}
-          <input
-            id="password"
-            type="password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            placeholder="Password"
-          />
-          <button className="form-button">create</button>
-          <p className="message">
-            <button className="form-button" onClick={() => setIsRegister(false)}>
-              Already Registered? Sign in
-            </button>
-          </p>
-        </form>
-      </div>
+    <div className="form">
+      <form className="register-form" onSubmit={handleRegisterSubmit}>
+        {errors.firstName && touched.firstName && <p className="form-error">{errors.firstName}</p>}
+        <input
+          type="text"
+          id="firstName"
+          value={values.firstName}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder="First Name"
+        />
+        {errors.lastName && touched.lastName && <p className="form-error">{errors.lastName}</p>}
+        <input
+          type="text"
+          id="lastName"
+          value={values.lastName}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder="Last Name"
+        />
+        {errors.email && touched.email && <p className="form-error">{errors.email}</p>}
+        <input
+          type="text"
+          id="email"
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder="Email Address"
+        />
+        {errors.password && touched.password && <p className="form-error">{errors.password}</p>}
+        <input
+          id="password"
+          type="password"
+          value={values.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder="Password"
+        />
+        <button className="form-button">create</button>
+        <p className="message">
+          <button className="form-button" onClick={() => setIsRegister(false)}>
+            Already Registered? Sign in
+          </button>
+        </p>
+      </form>
     </div>
   );
 }

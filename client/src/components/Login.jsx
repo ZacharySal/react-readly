@@ -22,17 +22,15 @@ function Login({ setIsRegister }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: login_formik.values.email,
+          email: login_formik.values.email.toLowerCase(),
           password: login_formik.values.password,
         }),
       },
       true
     );
     if (result.errMsg) {
-      console.log(errorMsg);
       setErrorMsg(result.errMsg);
     } else {
-      console.log(result.response);
       const user = result.response.user;
       const token = result.response.token;
       setAuth({ user, token });
@@ -53,41 +51,39 @@ function Login({ setIsRegister }) {
   return (
     <>
       {errorMsg && <InfoMessage type="error" resetMsg={setErrorMsg} text={errorMsg} />}
-      <div className="login-page">
-        <div className="form">
-          <form className="login-form" onSubmit={handleLoginSubmit}>
-            {login_formik.errors.email && login_formik.touched.email && (
-              <p className="form-error">{login_formik.errors.email}</p>
-            )}
-            <input
-              type="text"
-              id="email"
-              value={login_formik.values.email}
-              onChange={login_formik.handleChange}
-              onBlur={login_formik.handleBlur}
-              placeholder="Email Address"
-              className={login_formik.errors.email ? "input-error" : ""}
-            />
+      <div className="form">
+        <form className="login-form" onSubmit={handleLoginSubmit}>
+          {login_formik.errors.email && login_formik.touched.email && (
+            <p className="form-error">{login_formik.errors.email}</p>
+          )}
+          <input
+            type="text"
+            id="email"
+            value={login_formik.values.email}
+            onChange={login_formik.handleChange}
+            onBlur={login_formik.handleBlur}
+            placeholder="Email Address"
+            className={login_formik.errors.email ? "input-error" : ""}
+          />
 
-            {login_formik.errors.password && login_formik.touched.password && (
-              <p className="form-error">{login_formik.errors.password}</p>
-            )}
-            <input
-              type="password"
-              id="password"
-              value={login_formik.values.password}
-              onChange={login_formik.handleChange}
-              onBlur={login_formik.handleBlur}
-              placeholder="Password"
-            />
-            <button className="form-button">login</button>
-            <p className="message">
-              <button className="form-button" onClick={() => setIsRegister(true)}>
-                Not registered? Create an account
-              </button>
-            </p>
-          </form>
-        </div>
+          {login_formik.errors.password && login_formik.touched.password && (
+            <p className="form-error">{login_formik.errors.password}</p>
+          )}
+          <input
+            type="password"
+            id="password"
+            value={login_formik.values.password}
+            onChange={login_formik.handleChange}
+            onBlur={login_formik.handleBlur}
+            placeholder="Password"
+          />
+          <button className="form-button">login</button>
+          <p className="message">
+            <button className="form-button" onClick={() => setIsRegister(true)}>
+              Create an account
+            </button>
+          </p>
+        </form>
       </div>
     </>
   );

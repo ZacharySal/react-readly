@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import apiRequest from "../apiRequest";
 import InfoMessage from "./InfoMessage";
@@ -22,7 +22,6 @@ function BookDescription({ id }) {
   useEffect(() => {
     const getBookInfo = async () => {
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${id}`);
-      console.log(response);
       const result = await response.json();
       setImgSrc(result.volumeInfo.imageLinks.thumbnail);
       setBook(result);
@@ -47,16 +46,22 @@ function BookDescription({ id }) {
       if (result.errMsg) {
         setErrorMsg("Error fetching reading list");
       } else {
-        console.log(result.response);
         setReadingListBooks(result.response);
       }
     };
-    getBooks();
+    if (auth.user) {
+      getBooks();
+    }
   }, []);
 
   // Add book to reading list
   const handleAddBookReadingList = async (e) => {
     e.preventDefault();
+    if (!auth.user) {
+      console.log("no user found");
+      navigate("/login");
+      return;
+    }
     const result = await apiRequest(
       `https://readly-2ed12337352a.herokuapp.com/user/reading_list/add`,
       {
@@ -95,8 +100,12 @@ function BookDescription({ id }) {
   // Add book to cart
   const handleAddBookCart = async (e) => {
     e.preventDefault();
-    console.log(`user: ${auth.user._id}`);
-    console.log(`book: ${book._id}`);
+    if (!auth.user) {
+      console.log("no user found");
+      navigate("/login");
+      return;
+    }
+    console.log("user found, adding book");
     const result = await apiRequest(
       `https://readly-2ed12337352a.herokuapp.com/user/cart/add`,
       {
@@ -132,22 +141,7 @@ function BookDescription({ id }) {
               dangerouslySetInnerHTML={{ __html: book.volumeInfo.description }}
             ></div>
             <hr />
-            <div className="book-detail-more-info">
-              <strong>Release Date: </strong>
-              {book.volumeInfo.publishedDate}
-            </div>
-
             <div className="button-container">
-              {/* {checkBookInReadingLists() && (
-                <div className="button" onClick={handleRemoveBookReadingList}>
-                  remove from reading list
-                </div>
-              )}
-
-              <div className="button" onClick={handleAddBookReadingList}>
-                add to reading list
-              </div> */}
-
               {checkBookInReadingLists() ? (
                 <div className="button" onClick={handleRemoveBookReadingList}>
                   remove from reading list

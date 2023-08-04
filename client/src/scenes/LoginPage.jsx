@@ -8,21 +8,11 @@ function LoginPage() {
 
   return (
     <>
-      <div
-        className="login-bg"
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          paddingTop: "10rem",
-        }}
-      >
-        <h1 style={{ fontSize: "3rem", fontFamily: "Playfair Display, serif" }}>
-          Welcome to <span style={{ color: "lightcoral" }}>Readly</span>, A place to view and
+      <div className="login-page">
+        <div className="login-text">
+          Welcome to <span style={{ color: "lightcoral" }}>Readly</span>, a place to view and
           explore every book imaginable
-        </h1>
+        </div>
         {isRegister && <Register setIsRegister={setIsRegister} />}
         {!isRegister && <Login setIsRegister={setIsRegister} />}
       </div>

@@ -1,16 +1,18 @@
 import ContentLayout from "../components/ContentLayout";
 import BookDisplay from "../components/BookDisplay";
 import BookCard from "../components/BookCard";
-import BookSection from "../components/BookSection";
-import apiRequest from "../apiRequest";
+
 import { useState, useEffect } from "react";
-import useAuth from "../hooks/useAuth";
 
 function ReadingListPage({ userID }) {
-  //const [errMsg, setErrorMsg] = useState(null);
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   let bookIds = [];
+
+  const skeletonBooks = [];
+  for (let i = 0; i <= 10; i++) {
+    skeletonBooks.push(<div className="skeleton-book-card animate-pulse"></div>);
+  }
 
   useEffect(() => {
     const getBookInfo = async (bookId) => {
@@ -38,19 +40,18 @@ function ReadingListPage({ userID }) {
   return (
     <ContentLayout>
       <BookDisplay>
-        {isLoading && <h1>Loading...</h1>}
-        {!isLoading && (
-          <>
-            <h1>Your Reading List</h1>
-            <div className="book-genre">
-              {books.map((book, i) => {
+        <>
+          <h1>Your Reading List</h1>
+          <div className="book-genre">
+            {isLoading && skeletonBooks}
+            {!isLoading &&
+              books.map((book, i) => {
                 if (JSON.stringify(book).includes("thumbnail")) {
                   return <BookCard key={i} book={book} />;
                 }
               })}
-            </div>
-          </>
-        )}
+          </div>
+        </>
       </BookDisplay>
     </ContentLayout>
   );

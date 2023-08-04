@@ -1,14 +1,15 @@
 import BookCard from "./BookCard";
 import { useState, useEffect } from "react";
 
-// We need to get the books from the book source (author or genre) and display them as book cards
-
 function BookSection({ category }) {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [startIndex, setStartIndex] = useState(41);
 
-  console.log(books);
+  const skeletonBooks = [];
+  for (let i = 0; i <= 40; i++) {
+    skeletonBooks.push(<div className="skeleton-book-card animate-pulse"></div>);
+  }
 
   useEffect(() => {
     const getBooksInCategory = async () => {
@@ -23,7 +24,6 @@ function BookSection({ category }) {
   }, []);
 
   const getAdditionalBooks = async () => {
-    console.log(startIndex);
     const response = await fetch(
       `https://www.googleapis.com/books/v1/volumes?q=${category}&maxResults=40&startIndex=${startIndex}`
     );
@@ -35,14 +35,14 @@ function BookSection({ category }) {
 
   return (
     <>
-      {isLoading && <h1>Loading...</h1>}
+      <h1 className="book-genre-header"> Explore {category} Books</h1>
+      {isLoading && <div className="book-genre">{skeletonBooks}</div>}
       {!isLoading && (
         <>
-          <h1> Explore {category} Books</h1>
           <div className="book-genre">
-            {books.map((book, i) => {
+            {books.map((book) => {
               if (JSON.stringify(book).includes("thumbnail")) {
-                return <BookCard key={i} book={book} />;
+                return <BookCard key={book.id} book={book} />;
               }
             })}
           </div>

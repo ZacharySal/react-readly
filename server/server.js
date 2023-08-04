@@ -15,8 +15,6 @@ const userRouter = require("./routes/userRouter");
 const app = express();
 const PORT = process.env.PORT;
 
-const Book = require("./models/Book");
-
 const MONGO_URL = process.env.MONGO_URL;
 
 const limiter = RateLimit({
@@ -29,17 +27,6 @@ async function main() {
   await mongoose.connect(MONGO_URL);
   console.log("Connected to MongoDB...");
 }
-
-const deleteAllData = async () => {
-  try {
-    await Book.deleteMany();
-    console.log("All Data successfully deleted");
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//deleteAllData();
 
 app.use(compression());
 app.use(helmet());

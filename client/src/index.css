@@ -8,15 +8,10 @@
   box-sizing: border-box;
 }
 
-.App {
-  height: 100vh;
-}
-
 html,
 body {
   margin: 0;
   padding: 0;
-  -webkit-font-smoothing: auto;
 }
 
 /* Remove default margin */
@@ -55,37 +50,51 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-.info-message-container {
-  position: absolute;
-  top: 5%;
-  left: 50%;
-  width: 600px;
-  height: 80px;
-  color: black;
+.flex-between {
   display: flex;
-  font-size: 1.75rem;
-  justify-content: center;
-  align-items: center;
-  background-color: antiquewhite;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  border-radius: 10px;
+  justify-content: space-between;
+  align-content: center;
 }
 
-.info-message-text {
+.flex-evenly {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-message-container {
+  position: fixed;
+  top: 0;
+  padding: 1rem;
+  width: 100%;
+  height: 4.5rem;
+  color: black;
+  display: flex;
+  font-size: 1.3rem;
+  justify-content: start;
+  align-items: center;
+  background-color: antiquewhite;
+  z-index: 10;
   font-family: "Playfair Display", serif;
 }
 
 .navbar {
-  height: 5.5rem;
-  font-size: 1.75rem;
+  height: 4.5rem;
+  min-width: 100%;
+  font-size: 1.5rem;
+  padding: 0rem 1.5rem;
+  border-bottom: 1px solid gainsboro;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 4rem;
   font-family: "Playfair Display", serif;
   background-color: white;
-  position: sticky;
   top: 0;
   z-index: 1;
   box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.1);
@@ -97,21 +106,21 @@ a:not([class]) {
 
 .search-container {
   font-family: "Montserrat", sans-serif;
+  width: 100%;
   border: 4px solid gainsboro;
-  border-radius: 15px;
 }
 
 .search-box {
-  width: 600px;
+  width: 100%;
   height: 45px;
   border-radius: 15px;
   display: flex;
-  padding: 10px;
+  padding: 2.5px;
   box-shadow: 0 8px 6px -10px #b3c6ff;
 }
 
 .search-field {
-  width: 100%;
+  min-width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -124,7 +133,7 @@ a:not([class]) {
   height: 100%;
   border: 0;
   font-size: 1rem;
-  padding-left: 1.25rem;
+  padding: 0.5rem;
   color: rgba(0, 0, 0, 0.6);
 }
 
@@ -146,53 +155,48 @@ a:not([class]) {
   height: max-content;
 }
 
-.sidebar {
-  width: 250px;
-  height: calc(100vh - 3em);
+.side-menu {
+  width: 60%;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 2;
+  background-color: white;
+  position: fixed;
   left: 0;
-  top: 5.5rem;
-  display: flex;
-  position: sticky;
-  padding: 1rem;
+  transition: left 1s ease-in-out;
+  box-shadow: 1rem 1rem 5rem 10rem rgba(0, 0, 0, 0.4);
+}
+
+.side-menu ul {
+  list-style-type: none;
   font-family: "Playfair Display", serif;
-  font-size: 2rem;
-  flex-direction: column;
-  /* offset-x | offset-y | blur-radius | spread-radius | color */
-  box-shadow: 1px 5px 3px 3px rgba(0, 0, 0, 0.2);
+  font-size: 1.85rem;
+  padding-inline-start: 0px;
+  padding: 10px 20px;
+  display: grid;
+  gap: 1rem;
 }
 
-.sidebar > * {
-  padding: 0.3rem;
+.side-menu ul ul {
+  gap: 0.5rem;
+  padding-inline-start: 0px;
 }
 
-.sidebar-header {
-  font-weight: bold;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-}
-
-.sidebar-item {
+.side-menu ul li li {
+  color: black;
   font-size: 1.25rem;
-  text-overflow: ellipsis;
-  text-transform: capitalize;
-  white-space: nowrap;
-  cursor: pointer;
-  text-overflow: ellipsis;
-  overflow-x: hidden;
-  width: 100%;
+  padding-inline-start: 0px;
 }
 
-.sidebar hr {
-  display: block;
-  height: 2px;
-  border: 0;
-  border-top: 3px solid #ccc;
-  margin: 0.75em 0;
-  padding: 0;
+.side-menu .fa-xmark {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2.5rem;
 }
 
 .books-overview {
-  padding: 3rem 4rem;
+  padding: 0.5rem;
   width: 100%;
   height: 100%;
   display: flex;
@@ -200,48 +204,63 @@ a:not([class]) {
 }
 
 .books-overview > h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-top: 0.5rem;
 }
 
 .book-genre {
-  display: flex;
   width: 100%;
   height: 100%;
   font-family: "Playfair Display", serif;
-  flex-direction: row;
-  flex-wrap: wrap;
+  margin: 0.5rem 0rem;
+  display: grid;
+  column-gap: 4px;
+  row-gap: 2px;
+  grid-template-columns: repeat(auto-fit, 100px);
+  justify-content: center;
 }
 
 .book-overview-card {
-  margin: 0.6rem;
   border-radius: 5%;
   cursor: pointer;
 }
 
-/* .book-overview-card > h1 {
-  padding-top: 0.5rem;
-  font-size: 1.5rem;
-} */
-
 .book-overview-card > img {
-  height: 250px;
-  width: 150px;
+  height: 150px;
+  width: 100px;
   object-fit: cover;
-  margin: auto;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.skeleton-book-card {
+  background-color: rgb(199, 199, 199);
+  height: 150px;
+  width: 100px;
+  border-radius: 5%;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .book-detail-container {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   font-family: "Playfair Display", serif;
-  width: 80%;
+  width: 100%;
   height: 100%;
-  padding: 5rem 10rem;
 }
+
 .book-detail-image-container {
+  margin: 2rem;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -250,43 +269,39 @@ a:not([class]) {
 }
 
 .book-detail-image {
-  width: 500px;
-  height: 700px;
+  width: 250px;
+  height: 200px;
   object-fit: contain;
 }
 
 .book-detail-description {
   font-family: "Playfair Display", serif;
-  margin-left: 10rem;
+  padding: 0rem 1rem;
 }
 
 .book-detail-title {
   font-weight: 700;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .book-detail-author {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 500;
 }
 
 .book-detail-summary {
-  margin: 2.5rem 0rem;
-  font-size: 1.25rem;
-  font-weight: 500;
-  max-height: 600px;
-  overflow-y: auto;
+  font-size: 1rem;
+  margin: 1rem 0rem;
 }
 
 .book-detail-more-info {
-  margin: 2rem 0rem;
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 .dot {
   position: absolute;
-  height: 650px;
-  width: 600px;
+  height: 200px;
+  width: 200px;
   background-color: #bbb;
   opacity: 0.3;
   border-radius: 50%;
@@ -294,21 +309,66 @@ a:not([class]) {
 }
 
 .header-text {
+  display: none;
   text-align: center;
-  font-size: 3.5rem;
-  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 4rem;
   width: 100%;
+  margin: 1rem 0rem;
   background-color: lightcoral;
 }
 
-.login-page {
-  padding: 8% 0 0;
+.login-text {
+  font-size: 2rem;
+  margin: 0rem 2rem;
+  text-align: center;
+  font-family: "Playfair Display", serif;
 }
 
-.login-bg {
+.login-page {
   background-image: url("../public/images/cool-background.svg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: top;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.order-history-page {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0rem;
+}
+
+.order {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgba(250, 235, 215, 0.6);
+  align-items: center;
+  border-radius: 20px;
+  width: 90%;
+  height: 180px;
+  padding: 0.5rem 1rem;
+}
+
+.skeleton-order {
+  width: 90%;
+  height: 180px;
+  border-radius: 20px;
+  background-color: rgb(199, 199, 199);
 }
 
 .form {
@@ -316,10 +376,12 @@ a:not([class]) {
   z-index: 1;
   background: #ffffff;
   margin: 0 auto 100px;
-  padding: 45px;
+  padding: 1.25rem;
+  width: 80%;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -330,7 +392,7 @@ a:not([class]) {
   margin: 0 0 15px;
   padding: 15px;
   box-sizing: border-box;
-  font-size: 25px;
+  font-size: 1rem;
 }
 
 .form-error {
@@ -361,16 +423,19 @@ a:not([class]) {
   max-width: 300px;
   margin: 0 auto;
 }
+
 .container:before,
 .container:after {
   content: "";
   display: block;
   clear: both;
 }
+
 .container .info {
   margin: 50px auto;
   text-align: center;
 }
+
 .container .info h1 {
   margin: 0 0 15px;
   padding: 0;
@@ -378,14 +443,17 @@ a:not([class]) {
   font-weight: 300;
   color: #1a1a1a;
 }
+
 .container .info span {
   color: #4d4d4d;
   font-size: 12px;
 }
+
 .container .info span a {
   color: #000000;
   text-decoration: none;
 }
+
 .container .info span .fa {
   color: #ef3b3a;
 }
@@ -397,54 +465,70 @@ a:not([class]) {
 .button-container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  margin: 1rem 0rem;
 }
 
 .button {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   border-radius: 10px;
-  font-size: 1rem;
-  height: 4rem;
-  width: 20rem;
-  margin: 1rem;
-  background: antiquewhite;
-  display: flex;
+  font-size: 0.9rem;
+  height: 3rem;
+  width: 10rem;
+  margin: 0rem 0.5rem;
+  padding: 0.5rem;
+  flex-grow: 1;
+  background: rgba(250, 235, 215, 0.7);
   color: black;
   cursor: pointer;
   transition: transform 0.1s;
-  text-transform: uppercase;
+  text-transform: capitalize;
   user-select: none;
+}
+
+.skeleton-button {
+  border-radius: 10px;
+  height: 3rem;
+  width: 10rem;
+  background-color: rgb(199, 199, 199);
+}
+
+.skeleton-text {
+  height: 2rem;
+  width: 10rem;
+  background-color: rgb(199, 199, 199);
 }
 
 .form-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 20px;
   font-size: 1rem;
-  height: 4rem;
-  width: 20rem;
-  margin: 1rem;
+  height: 2.5rem;
   display: flex;
   color: black;
   cursor: pointer;
-  text-transform: uppercase;
+  text-transform: capitalize;
   user-select: none;
   font-family: "Playfair Display", serif;
   background: white;
   width: 100%;
-  border: 1;
+  outline: 2px black solid;
+  border: 0;
   margin: 0;
-  padding: 15px;
-  border-radius: 20px;
-  font-size: 20px;
   cursor: pointer;
 }
 
 .form button:hover {
   color: lightcoral;
 }
+
 i {
   margin-right: 10px;
 }
@@ -453,8 +537,18 @@ i {
   font-size: 2rem;
 }
 
+.shopping-cart-page {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .shopping-cart {
-  width: 60%;
+  width: 90%;
+  margin: 1rem;
   height: auto;
   overflow: auto;
 }
@@ -462,26 +556,51 @@ i {
 .sub-headers {
   display: flex;
   padding: 0rem 1.5rem;
+  font-size: 0.75rem;
   opacity: 0.6;
   justify-content: space-between;
+}
+
+.shopping-cart-cta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 0.75rem;
+  width: 100%;
+}
+
+.item-title-author {
+  font-size: 0.75rem;
 }
 
 .item-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1rem;
-  background-color: antiquewhite;
+  padding: 1rem;
   background-color: rgba(250, 235, 215, 0.6);
   border-radius: 20px;
   margin: 1rem 0rem;
+  width: 100%;
+  height: 150px;
+}
+
+.skeleton-item-card {
+  width: 100%;
+  height: 150px;
+  border-radius: 20px;
+  margin: 1rem 0rem;
+  background-color: rgb(199, 199, 199);
 }
 
 .item-description {
-  padding: 0.25rem;
+  padding: 0.5rem;
+  margin-right: 0.25rem;
   display: flex;
   flex-direction: row;
 }
+
 .item-description > img {
   max-height: 100px;
   padding-right: 1rem;
@@ -489,8 +608,268 @@ i {
 }
 
 .price {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
-@media (min-width: 1025px) {
+.order-complete {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 4rem 1rem;
+  text-align: center;
+  gap: 1.25rem;
+  font-size: 0.75rem;
+}
+
+.order-complete .fa-circle-check {
+  font-size: 10rem;
+  color: green;
+}
+
+.book-genre-header {
+  text-transform: capitalize;
+}
+
+.mobile-hidden {
+  display: none;
+}
+
+@media screen and (min-width: 800px) {
+  .App {
+    margin-left: 250px;
+  }
+  .desktop-hidden {
+    display: none;
+  }
+
+  .mobile-hidden {
+    display: block;
+  }
+
+  .login-text {
+    font-size: 2.5rem;
+    margin: 0rem 4rem;
+  }
+
+  .login-page {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .form {
+    margin: 4rem 0rem;
+    width: 800px;
+    padding: 2rem;
+  }
+
+  .form input {
+    font-size: 1rem;
+  }
+
+  .form-button {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  .navbar {
+    height: 4rem;
+    font-size: 1.5rem;
+    padding: 1rem 3rem;
+    position: sticky;
+    overflow: none;
+  }
+
+  .search-container {
+    width: 40%;
+    border: 4px solid gainsboro;
+  }
+
+  .search-box {
+    height: 40px;
+  }
+
+  .search-field .input {
+    font-size: 1rem;
+  }
+
+  .header-text {
+    display: block;
+    font-size: 3rem;
+  }
+
+  .sidebar {
+    width: 250px;
+    min-height: 100%;
+    left: 0;
+    position: fixed;
+    font-family: "Playfair Display", serif;
+    box-shadow: 1px 5px 3px 3px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+  }
+
+  .sidebar-header {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .sidebar-item {
+    font-size: 1.25rem;
+    padding: 0.3rem 0rem;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    white-space: nowrap;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .sidebar hr {
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 3px solid #ccc;
+    margin: 0.75em 0;
+    padding: 0;
+  }
+
+  .books-overview {
+    margin: 0rem 3rem;
+  }
+
+  .books-overview > h1 {
+    font-size: 1.5rem;
+    margin-top: 0;
+  }
+  .book-genre {
+    column-gap: 10px;
+    row-gap: 5px;
+    grid-template-columns: repeat(auto-fit, 120px);
+    justify-content: start;
+  }
+
+  .book-overview-card > img {
+    height: 200px;
+    width: 120px;
+  }
+
+  .skeleton-book-card {
+    height: 200px;
+    width: 120px;
+  }
+
+  .button {
+    height: 3rem;
+    font-size: 1rem;
+  }
+
+  .book-detail-container {
+    flex-direction: row;
+    font-family: "Playfair Display", serif;
+    width: 80%;
+    height: 100%;
+    margin: 5rem 8rem;
+  }
+
+  .book-detail-image {
+    width: 300px;
+    height: 500px;
+    object-fit: contain;
+  }
+
+  .book-detail-description {
+    margin-left: 6rem;
+  }
+
+  .book-detail-title {
+    font-weight: 700;
+    font-size: 2.5rem;
+  }
+
+  .book-detail-author {
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+
+  .book-detail-summary {
+    margin: 1.25rem 0rem;
+    font-size: 1rem;
+    font-weight: 500;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .book-detail-more-info {
+    margin: 2rem 0rem;
+    font-size: 1.25rem;
+  }
+
+  .dot {
+    position: absolute;
+    height: 400px;
+    width: 350px;
+    background-color: #bbb;
+    opacity: 0.2;
+    border-radius: 50%;
+    z-index: -1;
+  }
+
+  .button-container {
+    margin: 1rem 0rem;
+  }
+
+  .shopping-cart {
+    width: 50%;
+    margin-top: 2rem;
+    height: auto;
+    overflow: auto;
+  }
+
+  .shopping-cart-cta {
+    margin-bottom: 2rem;
+  }
+
+  .order-history-page {
+    width: 100%;
+    margin: 2rem 0rem;
+  }
+
+  .order {
+    width: 50%;
+  }
+
+  .order .book-overview-card > img {
+    height: 150px;
+    width: 100px;
+    object-fit: cover;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .skeleton-order {
+    width: 50%;
+    height: 180px;
+    border-radius: 20px;
+    background-color: rgb(199, 199, 199);
+  }
+
+  .info-message-container {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    width: 600px;
+    height: 60px;
+    color: black;
+    display: flex;
+    font-size: 1.25rem;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    border-radius: 10px;
+    font-family: "Playfair Display", serif;
+  }
 }

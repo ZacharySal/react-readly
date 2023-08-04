@@ -11,6 +11,9 @@ function OrderHistoryPage({ userID }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    if (!userID) {
+      window.location.reload(false);
+    }
     const makeRequest = async () => {
       const result = await apiRequest(
         `https://readly-2ed12337352a.herokuapp.com/user/order_history/${userID}`,
@@ -25,7 +28,6 @@ function OrderHistoryPage({ userID }) {
       } else {
         setIsLoading(false);
         setOrders(result.response);
-        console.log(result.response);
       }
     };
     makeRequest();
@@ -33,7 +35,6 @@ function OrderHistoryPage({ userID }) {
 
   const handleRemoveOrder = (order_id) => async (e) => {
     e.preventDefault();
-    console.log(order_id);
     const result = await apiRequest(
       `https://readly-2ed12337352a.herokuapp.com/user/order_history/remove`,
       {
@@ -53,31 +54,22 @@ function OrderHistoryPage({ userID }) {
 
   return (
     <>
-      {!isLoading && (
-        <>
-          {errMsg && <InfoMessage type="error" resetMsg={setErrorMsg} text={errMsg} />}
-          {infoMsg && <InfoMessage type="info" resetMsg={setInfoMsg} text={infoMsg} />}
-          <ContentLayout>
-            <div
-              style={{
-                width: "100%",
-                height: "80%",
-                display: "flex",
-                margin: "4rem auto 0rem auto",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-                gap: "2rem",
-              }}
-            >
-              {orders.map((order) => (
-                <Order order={order} key={order._id} handleRemoveOrder={handleRemoveOrder} />
-              ))}
-            </div>
-          </ContentLayout>
-        </>
-      )}
-      {isLoading && <h1>Loading....</h1>}
+      {errMsg && <InfoMessage type="error" resetMsg={setErrorMsg} text={errMsg} />}
+      {infoMsg && <InfoMessage type="info" resetMsg={setInfoMsg} text={infoMsg} />}
+      <ContentLayout>
+        <div className="order-history-page">
+          {!isLoading &&
+            orders.map((order) => (
+              <Order order={order} key={order._id} handleRemoveOrder={handleRemoveOrder} />
+            ))}
+          {isLoading && (
+            <>
+              <div className="skeleton-order" />
+              <div className="skeleton-order" />
+            </>
+          )}
+        </div>
+      </ContentLayout>
     </>
   );
 }
