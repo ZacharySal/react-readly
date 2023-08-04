@@ -12,7 +12,7 @@ function HomePage() {
     <ContentLayout>
       {errorMsg && <InfoMessage text={errorMsg} type={"error"} />}
       <BookDisplay>
-        <BookSection category={"Detective"} />
+        <BookSection category={"Nonfiction"} />
       </BookDisplay>
     </ContentLayout>
   );
