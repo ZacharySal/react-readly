@@ -39,7 +39,9 @@ function BookCover({ book }) {
 
   useEffect(() => {
     const makeRequest = async () => {
-      const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${book}`);
+      const response = await fetch(
+        `https://www.googleapis.com/books/v1/volumes/${book}&key=${process.env.REACT_APP_BOOKS_API_KEY}`
+      );
       const result = await response.json();
       setPicturePath(result.volumeInfo.imageLinks.thumbnail);
     };

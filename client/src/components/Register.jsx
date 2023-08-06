@@ -1,18 +1,11 @@
-import useAuth from "../hooks/useAuth";
 import apiRequest from "../apiRequest";
 import registerSchema from "../schemas/registerSchema";
 
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 
 function Register({ setIsRegister }) {
-  const { setAuth } = useAuth();
-  const [errorMsg, setErrorMsg] = useState("");
-
-  let navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const [setErrorMsg] = useState("");
 
   let handleRegisterSubmit = async (e) => {
     e.preventDefault();
@@ -37,17 +30,16 @@ function Register({ setIsRegister }) {
     }
   };
 
-  const { values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-      },
-      validationSchema: registerSchema,
-      handleRegisterSubmit,
-    });
+  const { values, errors, touched, handleBlur, handleChange } = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: registerSchema,
+    handleRegisterSubmit,
+  });
 
   return (
     <div className="form">

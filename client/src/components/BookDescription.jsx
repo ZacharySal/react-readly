@@ -21,7 +21,9 @@ function BookDescription({ id }) {
   //get book info
   useEffect(() => {
     const getBookInfo = async () => {
-      const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${id}`);
+      const response = await fetch(
+        `https://www.googleapis.com/books/v1/volumes/${id}&key=${process.env.REACT_APP_BOOKS_API_KEY}`
+      );
       const result = await response.json();
       setImgSrc(result.volumeInfo.imageLinks.thumbnail);
       setBook(result);
@@ -58,7 +60,6 @@ function BookDescription({ id }) {
   const handleAddBookReadingList = async (e) => {
     e.preventDefault();
     if (!auth.user) {
-      console.log("no user found");
       navigate("/login");
       return;
     }
@@ -101,11 +102,9 @@ function BookDescription({ id }) {
   const handleAddBookCart = async (e) => {
     e.preventDefault();
     if (!auth.user) {
-      console.log("no user found");
       navigate("/login");
       return;
     }
-    console.log("user found, adding book");
     const result = await apiRequest(
       `https://readly-2ed12337352a.herokuapp.com/user/cart/add`,
       {

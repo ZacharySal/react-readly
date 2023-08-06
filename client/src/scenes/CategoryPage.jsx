@@ -4,7 +4,7 @@ import BookSection from "../components/BookSection";
 import BookDisplay from "../components/BookDisplay";
 
 function CategoryPage() {
-  const { category, type } = useParams();
+  const { category } = useParams();
 
   return (
     <ContentLayout>

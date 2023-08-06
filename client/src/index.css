@@ -748,7 +748,7 @@ i {
     column-gap: 10px;
     row-gap: 5px;
     grid-template-columns: repeat(auto-fit, 120px);
-    justify-content: start;
+    justify-content: flex-start;
   }
 
   .book-overview-card > img {

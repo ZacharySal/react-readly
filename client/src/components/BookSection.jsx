@@ -14,7 +14,7 @@ function BookSection({ category }) {
   useEffect(() => {
     const getBooksInCategory = async () => {
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${category}&maxResults=40&startIndex=0`
+        `https://www.googleapis.com/books/v1/volumes?q=${category}&maxResults=40&startIndex=0&key=${process.env.REACT_APP_BOOKS_API_KEY}`
       );
       const result = await response.json();
       setBooks((books) => result.items);
@@ -25,7 +25,7 @@ function BookSection({ category }) {
 
   const getAdditionalBooks = async () => {
     const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${category}&maxResults=40&startIndex=${startIndex}`
+      `https://www.googleapis.com/books/v1/volumes?q=${category}&maxResults=40&startIndex=${startIndex}&key=${process.env.REACT_APP_BOOKS_API_KEY}`
     );
     const result = await response.json();
     const newBooks = result.items;
@@ -40,7 +40,7 @@ function BookSection({ category }) {
       {!isLoading && (
         <>
           <div className="book-genre">
-            {books.map((book) => {
+            {books?.map((book) => {
               if (JSON.stringify(book).includes("thumbnail")) {
                 return <BookCard key={book.id} book={book} />;
               }
