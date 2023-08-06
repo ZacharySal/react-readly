@@ -22,9 +22,11 @@ function BookDescription({ id }) {
   useEffect(() => {
     const getBookInfo = async () => {
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes/${id}&key=${process.env.REACT_APP_BOOKS_API_KEY}`
+        `https://www.googleapis.com/books/v1/volumes/${id}?key=${process.env.REACT_APP_BOOKS_API_KEY}`
       );
       const result = await response.json();
+      console.log(result);
+      console.log(id);
       setImgSrc(result.volumeInfo.imageLinks.thumbnail);
       setBook(result);
       setIsLoading(false);
