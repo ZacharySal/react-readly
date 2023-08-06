@@ -17,7 +17,7 @@ function ReadingListPage({ userID }) {
   useEffect(() => {
     const getBookInfo = async (bookId) => {
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes/${bookId}&key=${process.env.REACT_APP_BOOKS_API_KEY}`
+        `https://www.googleapis.com/books/v1/volumes/${bookId}?key=${process.env.REACT_APP_BOOKS_API_KEY}`
       );
       const book = await response.json();
       return book;

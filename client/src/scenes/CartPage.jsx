@@ -23,7 +23,7 @@ function CartPage({ userID }) {
 
     const getBookInfo = async (bookId) => {
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes/${bookId}&key=${process.env.REACT_APP_BOOKS_API_KEY}`
+        `https://www.googleapis.com/books/v1/volumes/${bookId}?key=${process.env.REACT_APP_BOOKS_API_KEY}`
       );
       const book = await response.json();
       return book;
@@ -134,9 +134,6 @@ function CartPage({ userID }) {
                 </div>
               </>
             )}
-            {books.length === 0 && (
-              <h1 style={{ textAlign: "center", marginTop: "4rem" }}> Your cart is empty </h1>
-            )}
           </div>
         </ContentLayout>
       </>
@@ -156,6 +153,8 @@ function CartPage({ userID }) {
         </div>
       </ContentLayout>
     );
+  } else if (!isLoading && books.length === 0) {
+    return <h1 style={{ textAlign: "center", marginTop: "4rem" }}> Your cart is empty </h1>;
   }
 }
 
