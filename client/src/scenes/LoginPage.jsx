@@ -10,8 +10,8 @@ function LoginPage() {
     <>
       <div className="login-page">
         <div className="login-text">
-          Welcome to <span style={{ color: "lightcoral" }}>Readly</span>, a place to view and
-          explore every book imaginable
+          Welcome to <span style={{ color: "lightcoral" }}>Readly</span>, a place to view and explore every book
+          imaginable
         </div>
         {isRegister && <Register setIsRegister={setIsRegister} />}
         {!isRegister && <Login setIsRegister={setIsRegister} />}

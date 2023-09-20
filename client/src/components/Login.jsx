@@ -52,6 +52,19 @@ function Login({ setIsRegister }) {
     <>
       {errorMsg && <InfoMessage type="error" resetMsg={setErrorMsg} text={errorMsg} />}
       <div className="form">
+        <div
+          style={{
+            textAlign: "left",
+            backgroundColor: "#f2f2f2",
+            padding: "0.5rem",
+            marginBottom: "1rem",
+            borderRadius: "8px",
+            color: "rgba(0,0,0,0.8)",
+          }}
+        >
+          <p>Demo Email: demo@gmail.com </p>
+          <p>Demo Password: demo123</p>
+        </div>
         <form className="login-form" onSubmit={handleLoginSubmit}>
           {login_formik.errors.email && login_formik.touched.email && (
             <p className="form-error">{login_formik.errors.email}</p>
@@ -77,11 +90,9 @@ function Login({ setIsRegister }) {
             onBlur={login_formik.handleBlur}
             placeholder="Password"
           />
-          <button className="form-button">login</button>
-          <p className="message">
-            <button className="form-button" onClick={() => setIsRegister(true)}>
-              Create an account
-            </button>
+          <button className="form-button">Login</button>
+          <p className="message" onClick={() => setIsRegister(true)}>
+            Don't have an account? Create one here.
           </p>
         </form>
       </div>

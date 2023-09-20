@@ -80,11 +80,9 @@ function Register({ setIsRegister }) {
           onBlur={handleBlur}
           placeholder="Password"
         />
-        <button className="form-button">create</button>
-        <p className="message">
-          <button className="form-button" onClick={() => setIsRegister(false)}>
-            Already Registered? Sign in
-          </button>
+        <button className="form-button">Create</button>
+        <p className="message" onClick={() => setIsRegister(false)}>
+          Already Registered? Sign in
         </p>
       </form>
     </div>
